@@ -1,0 +1,9 @@
+.idea/
+.pytest_cache/
+.venv/
+.allure/
+.coverage
+__pycache__/
+*.pyc
+*.log
+.DS_Store
