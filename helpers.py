@@ -9,9 +9,7 @@ from locators import (
     MainPageLocators,
     RegisterPageLocators,
 )
-
-
-BASE_URL = "https://stellarburgers.education-services.ru"
+from urls import BASE_URL, LOGIN_URL, REGISTER_URL
 WAIT_TIMEOUT = 10
 
 
@@ -42,12 +40,12 @@ def open_main_page(driver: WebDriver):
 
 
 def open_login_page(driver: WebDriver):
-    driver.get(f"{BASE_URL}/login")
+    driver.get(LOGIN_URL)
     wait_for_visibility(driver, LoginPageLocators.LOGIN_HEADING)
 
 
 def open_register_page(driver: WebDriver):
-    driver.get(f"{BASE_URL}/register")
+    driver.get(REGISTER_URL)
     wait_for_visibility(driver, RegisterPageLocators.REGISTER_HEADING)
 
 
@@ -85,23 +83,15 @@ def open_personal_account(driver: WebDriver):
 
 
 def switch_to_sauces(driver: WebDriver):
-    sauce_section = wait_for_visibility(driver, ConstructorPageLocators.SAUCES_SECTION)
-    driver.execute_script("arguments[0].scrollIntoView();", sauce_section)
     click_with_js(driver, ConstructorPageLocators.SAUCES_TAB)
-    wait_for_visibility(driver, ConstructorPageLocators.ACTIVE_SAUCES_TAB)
+    return wait_for_visibility(driver, ConstructorPageLocators.SAUCES_SECTION)
 
 
 def switch_to_fillings(driver: WebDriver):
-    filling_section = wait_for_visibility(
-        driver, ConstructorPageLocators.FILLINGS_SECTION
-    )
-    driver.execute_script("arguments[0].scrollIntoView();", filling_section)
     click_with_js(driver, ConstructorPageLocators.FILLINGS_TAB)
-    wait_for_visibility(driver, ConstructorPageLocators.ACTIVE_FILLINGS_TAB)
+    return wait_for_visibility(driver, ConstructorPageLocators.FILLINGS_SECTION)
 
 
 def switch_to_buns(driver: WebDriver):
-    buns_section = wait_for_visibility(driver, ConstructorPageLocators.BUNS_SECTION)
-    driver.execute_script("arguments[0].scrollIntoView();", buns_section)
     click_with_js(driver, ConstructorPageLocators.BUNS_TAB)
-    wait_for_visibility(driver, ConstructorPageLocators.ACTIVE_BUNS_TAB)
+    return wait_for_visibility(driver, ConstructorPageLocators.BUNS_SECTION)
